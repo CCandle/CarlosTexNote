@@ -133,11 +133,11 @@
 
 \titleformat{\chapter}[block]
   {\normalfont\sffamily\bfseries\color{CarlosNavy}\LARGE}
-  {\colorbox{CarlosTeal}{\color{white}\strut\hspace{0.25em}\thechapter\hspace{0.25em}}}
-  {0.7em}
+  {\color{CarlosTeal}\thechapter}
+  {0.6em}
   {}
   [\vspace{0.25em}{\color{CarlosRule}\titlerule[0.8pt]}]
-\titlespacing{\chapter}{0pt}{1.3em}{0.8em}
+\titlespacing{\chapter}{0pt}{1.0em}{0.7em}
 
 \titleformat{\section}[hang]
   {\normalfont\sffamily\bfseries\color{CarlosBlue}\large}
@@ -213,26 +213,24 @@
   carlos box/.style={
     enhanced,breakable,
     boxrule=0.45pt,arc=1.2mm,
-    left=4mm,right=4mm,top=3mm,bottom=3mm,
+    left=4mm,right=4mm,top=2.6mm,bottom=3mm,
     before skip=0.9em,after skip=0.85em,
   },
 }
 
-\newcommand{\carlos@badge}[2]{%
-  \colorbox{#1}{\color{white}\sffamily\bfseries\small\,\strut #2\,}}
 \newcommand{\carlos@label}[2]{{\sffamily\bfseries\color{#1}#2}}
 
 % #1 colour, #2 label, #3 number, #4 optional title
 \NewDocumentCommand{\carlos@head}{m m m m}{%
-  \carlos@label{#1}{#2}\hspace{0.45em}\carlos@badge{#1}{#3}%
-  \ifstrempty{#4}{}{\hspace{0.45em}{\sffamily\bfseries\color{#1}（#4）}}%
-  \par\vspace{0.25em}\noindent\ignorespaces
+  \carlos@label{#1}{#2}\hspace{0.5em}{\sffamily\bfseries\color{#1}#3}%
+  \ifstrempty{#4}{}{\hspace{0.75em}{\sffamily\bfseries\color{#1}#4}}%
+  \par\vspace{0.4em}\noindent\ignorespaces
 }
 % #1 colour, #2 label, #3 optional title
 \NewDocumentCommand{\carlos@headplain}{m m m}{%
   \carlos@label{#1}{#2}%
-  \ifstrempty{#3}{}{\hspace{0.45em}{\sffamily\bfseries\color{#1}（#3）}}%
-  \par\vspace{0.25em}\noindent\ignorespaces
+  \ifstrempty{#3}{}{\hspace{0.75em}{\sffamily\bfseries\color{#1}#3}}%
+  \par\vspace{0.4em}\noindent\ignorespaces
 }
 
 % -----------------------------------------------------------------------------
@@ -288,7 +286,7 @@
 \carlostex@newnumbered{example}
 \NewDocumentEnvironment{example}{O{}}{%
   \refstepcounter{example}%
-  \begin{tcolorbox}[carlos box,after skip=0.45em,colback=CarlosWarm!4!white,colframe=CarlosWarm!45!white,borderline west={1.4mm}{0pt}{CarlosWarm}]
+  \begin{tcolorbox}[carlos box,after skip=0.35em,colback=CarlosWarm!4!white,colframe=CarlosWarm!45!white,borderline west={1.4mm}{0pt}{CarlosWarm}]
   \carlos@head{CarlosWarm}{例题}{\theexample}{#1}%
 }{\end{tcolorbox}}
 
@@ -303,7 +301,7 @@
 \NewDocumentEnvironment{solution}{O{}}{%
   \begin{tcolorbox}[enhanced,breakable,boxrule=0.4pt,arc=1.2mm,
     colback=CarlosPanel,colframe=CarlosRule,
-    left=4mm,right=4mm,top=2.8mm,bottom=2.8mm,
+    left=4mm,right=4mm,top=2.4mm,bottom=2.8mm,
     before skip=0pt,after skip=0.85em,
     borderline west={1.4mm}{0pt}{CarlosMuted}]
   \carlos@headplain{CarlosMuted}{解}{#1}%
@@ -313,7 +311,7 @@
 \NewDocumentEnvironment{proof}{O{}}{%
   \par\needspace{3\baselineskip}\noindent
   {\sffamily\bfseries\color{CarlosInk}证明}%
-  \ifstrempty{#1}{}{\hspace{0.3em}{\sffamily\color{CarlosMuted}（#1）}}%
+  \ifstrempty{#1}{}{\hspace{0.5em}{\sffamily\color{CarlosMuted}#1}}%
   \hspace{0.4em}\ignorespaces
 }{\hfill\qedsymbol\par}
 

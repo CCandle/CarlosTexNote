@@ -79,7 +79,7 @@ latexmk -xelatex -synctex=1 -interaction=nonstopmode -file-line-error -outdir=bu
 | 方法 | `methodbox` | 不编号 | `mthd` |
 | 小结 | `summarybox` | 不编号 | `smry` |
 
-带标题参数的写法：`\begin{theorem}[洛必达法则] ... \end{theorem}`，编号会自动变成“定理 1.1（洛必达法则）”。标题留空时只显示编号。
+带标题参数的写法：`\begin{theorem}[洛必达法则] ... \end{theorem}`，编号会自动变成“定理 1.1 洛必达法则”。标题留空时只显示编号。
 
 示例引用：
 
