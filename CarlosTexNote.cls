@@ -133,11 +133,11 @@
 
 \titleformat{\chapter}[block]
   {\normalfont\sffamily\bfseries\color{CarlosNavy}\LARGE}
-  {\color{CarlosTeal}\thechapter}
-  {0.6em}
+  {\colorbox{CarlosTeal}{\color{white}\strut\hspace{0.25em}\thechapter\hspace{0.25em}}}
+  {0.7em}
   {}
   [\vspace{0.25em}{\color{CarlosRule}\titlerule[0.8pt]}]
-\titlespacing{\chapter}{0pt}{1.0em}{0.7em}
+\titlespacing{\chapter}{0pt}{1.3em}{0.8em}
 
 \titleformat{\section}[hang]
   {\normalfont\sffamily\bfseries\color{CarlosBlue}\large}
@@ -219,12 +219,15 @@
 }
 
 \newcommand{\carlos@label}[2]{{\sffamily\bfseries\color{#1}#2}}
+% Number highlighted with the environment colour: tight padding, no strut, same size.
+\newcommand{\carlos@badge}[2]{%
+  {\setlength{\fboxsep}{1.2pt}\colorbox{#1}{\color{white}\sffamily\bfseries #2}}}
 
 % #1 colour, #2 label, #3 number, #4 optional title
 \NewDocumentCommand{\carlos@head}{m m m m}{%
-  \carlos@label{#1}{#2}\hspace{0.5em}{\sffamily\bfseries\color{#1}#3}%
-  \ifstrempty{#4}{}{\hspace{0.75em}{\sffamily\bfseries\color{#1}#4}}%
-  \par\vspace{0.4em}\noindent\ignorespaces
+  \carlos@label{#1}{#2}\hspace{0.35em}\carlos@badge{#1}{#3}%
+  \ifstrempty{#4}{}{\hspace{0.6em}{\sffamily\bfseries\color{#1}#4}}%
+  \par\vspace{0.35em}\noindent\ignorespaces
 }
 % #1 colour, #2 label, #3 optional title
 \NewDocumentCommand{\carlos@headplain}{m m m}{%
