@@ -1,0 +1,28 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.xdv
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb
+*.lol
+*.dvi
+*.ps
+main.pdf
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+__MACOSX/

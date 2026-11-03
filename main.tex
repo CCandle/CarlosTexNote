@@ -1,0 +1,47 @@
+% Minimal starter for CarlosTexNote.
+% Copy CarlosTexNote.cls next to this file (or install it, see tools/install.sh)
+% and run:  latexmk -xelatex -outdir=build main.tex
+\documentclass[circuit]{CarlosTexNote}
+
+\title{课程笔记示例}
+\author{Carlos QU}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{示例章节}
+
+\section{环境}
+
+\begin{definition}
+函数 $f$ 在区间 $I$ 上连续，若对任意 $x_0\in I$，有 $\lim_{x\to x_0}f(x)=f(x_0)$。
+\end{definition}
+
+\begin{theorem}[介值定理]
+设 $f\in C[a,b]$，且 $f(a)\ne f(b)$，则对任意 $\mu$ 介于 $f(a)$、$f(b)$ 之间，存在 $\xi\in(a,b)$ 使 $f(\xi)=\mu$。
+\end{theorem}
+
+\begin{proof}
+由零点定理直接得到。
+\end{proof}
+
+\begin{example}[2024 数一]
+求 $\lim_{x\to 0}\frac{\sin x}{x}$。
+\end{example}
+
+\begin{solution}
+由等价无穷小 $\sin x\sim x$，得极限为 $1$。
+\end{solution}
+
+\begin{keybox}
+先写等价无穷小，再判断是否需要洛必达。
+\end{keybox}
+
+其他环境：\texttt{property}、\texttt{corollary}、\texttt{lemma}、\texttt{proposition}、\texttt{remark}、
+\texttt{egs}、\texttt{warningbox}、\texttt{methodbox}、\texttt{summarybox}，详见仓库 README 与 demo 工程。
+
+\end{document}
