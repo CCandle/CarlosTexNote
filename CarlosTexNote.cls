@@ -221,7 +221,7 @@
 \newcommand{\carlos@label}[2]{{\sffamily\bfseries\color{#1}#2}}
 % Number highlighted with the environment colour: tight padding, no strut, same size.
 \newcommand{\carlos@badge}[2]{%
-  {\setlength{\fboxsep}{1.2pt}\colorbox{#1}{\color{white}\sffamily\bfseries #2}}}
+  {\setlength{\fboxsep}{2.2pt}\colorbox{#1}{\color{white}\sffamily\bfseries #2}}}
 
 % #1 colour, #2 label, #3 number, #4 optional title
 \NewDocumentCommand{\carlos@head}{m m m m}{%
