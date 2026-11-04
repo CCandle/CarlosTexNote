@@ -97,6 +97,7 @@ latexmk -xelatex -synctex=1 -interaction=nonstopmode -file-line-error -outdir=bu
 | --- | --- |
 | `\d` | 直立微分 d，例如 `\frac{\d u}{\d x}`；文本模式仍保留原来的重音命令 |
 | `\R \N \Z \Q \C \O` | 实数集、自然数集、整数集、有理数集、复数集、空集 |
+| `\rank` `\diag` | 秩、对角矩阵算子（amsmath 的 `\operatorname`） |
 | `\cnoteheader` | 标题块左上角文字，默认“学习笔记”，可用 `\renewcommand` 修改 |
 | `\qedsymbol` | 证明结束符号，默认实心方块 |
 

@@ -369,6 +369,8 @@
 \let\daccent\d
 \let\d\relax
 \newcommand\d{\ifmmode\dif\else\expandafter\daccent\fi}
+\providecommand{\rank}{\operatorname{rank}}
+\providecommand{\diag}{\operatorname{diag}}
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
