@@ -7,6 +7,8 @@
 ## 特性
 
 - 基于 `ctexrep`：`chapter` 为顶层、每章另起页、双面排版（`twoside, openany`）
+- 标题层级：`\paragraph` 是带编号的 run-in 小标题；`\subparagraph` 是"行首关键词"
+  （run-in、无额外段前距，行距与正文一致，笔记里用 UltiSnips 的 `spara` 触发）
 - 内置数学笔记环境：定义、定理、性质、推论、引理、命题、注、例题、解答、证明，按章编号，支持 `\autoref`
 - 四个非编号 callout：`keybox`、`warningbox`、`methodbox`、`summarybox`
 - 图片默认从 `img/`、`fig/`、`pic/` 三个目录查找

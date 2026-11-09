@@ -154,6 +154,16 @@
   {\thesubsubsection}{0.6em}{}
 \titlespacing{\subsubsection}{0pt}{0.7em}{0.2em}
 
+% 行首关键词：把 \subparagraph 当作不带竖直间距的 run-in 关键词使用，行距与正文一致。
+% 注意：本文件加载了 titlesec，\ctexset 里的 beforeskip/afterskip 对标题间距不生效，
+% 所以这段间距必须用 titlesec 的 \titleformat / \titlespacing 配置。
+\titleformat{\subparagraph}[runin]
+  {\normalfont\zihao{-4}\heiti}
+  {}
+  {0pt}
+  {}
+\titlespacing*{\subparagraph}{2em}{0pt}{1em}
+
 \pretocmd{\section}{\Needspace{4\baselineskip}}{}{}
 \pretocmd{\subsection}{\Needspace{3\baselineskip}}{}{}
 
