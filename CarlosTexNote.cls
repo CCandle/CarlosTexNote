@@ -158,11 +158,16 @@
 % 注意：本文件加载了 titlesec，\ctexset 里的 beforeskip/afterskip 对标题间距不生效，
 % 所以这段间距必须用 titlesec 的 \titleformat / \titlespacing 配置。
 \titleformat{\subparagraph}[runin]
-  {\normalfont\zihao{-4}\heiti}
+  {\normalfont\zihao{-4}\heiti\color{CarlosBlue}}
   {}
   {0pt}
   {}
 \titlespacing*{\subparagraph}{2em}{0pt}{1em}
+
+% 行内关键词：正文里的行内小标签（与正文同段、同正文行距），绿色强调。
+\NewDocumentCommand{\keyword}{m}{%
+  {\heiti\color{CarlosTeal}#1}\hspace{1em}%
+}
 
 \pretocmd{\section}{\Needspace{4\baselineskip}}{}{}
 \pretocmd{\subsection}{\Needspace{3\baselineskip}}{}{}
