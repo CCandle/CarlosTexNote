@@ -164,10 +164,8 @@
   {}
 \titlespacing*{\subparagraph}{2em}{0pt}{1em}
 
-% 行内关键词：正文里的行内小标签（与正文同段、同正文行距），绿色强调。
-\NewDocumentCommand{\keyword}{m}{%
-  {\heiti\color{CarlosTeal}#1}\hspace{1em}%
-}
+% 行内关键词：完全继承正文的字体/字号/行距，只改颜色。
+\NewDocumentCommand{\keyword}{m}{\textcolor{CarlosTeal}{#1}}
 
 \pretocmd{\section}{\Needspace{4\baselineskip}}{}{}
 \pretocmd{\subsection}{\Needspace{3\baselineskip}}{}{}
