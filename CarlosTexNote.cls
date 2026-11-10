@@ -23,7 +23,7 @@
 \RequirePackage{setspace}
 \RequirePackage{titlesec}
 \RequirePackage{titletoc}
-\RequirePackage{xcolor}
+\RequirePackage[table]{xcolor}
 \RequirePackage{amsmath,amssymb,mathtools,bm}
 \allowdisplaybreaks[4]
 \RequirePackage{graphicx}\graphicspath{{img/}{fig/}{pic/}}
@@ -165,6 +165,8 @@
 \renewcommand{\arraystretch}{1.08}
 \captionsetup{font=small,labelfont={bf,color=NoteBlue},textfont={color=NoteInk},
   labelsep=quad,skip=3pt}
+\AtBeginEnvironment{table}{\small}
+\AtBeginEnvironment{longtable}{\small}
 
 % -----------------------------------------------------------------------------
 % Heading hierarchy: preserve the user's chapter/section/paragraph model.
@@ -172,6 +174,7 @@
 % -----------------------------------------------------------------------------
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{2}
+\ctexset{appendix={name={附录\ },number=\Alph{chapter}}}
 \titleformat{\chapter}[block]
   {\normalfont\sffamily\bfseries\color{NoteNavy}\LARGE}
   {\colorbox{NoteTeal}{\color{white}\strut\hspace{0.28em}\thechapter\hspace{0.28em}}}
