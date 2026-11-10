@@ -1,7 +1,9 @@
 % Minimal starter for CarlosTexNote.
-% Copy CarlosTexNote.cls next to this file (or install it, see tools/install.sh)
-% and run:  latexmk -xelatex -outdir=build main.tex
-\documentclass[circuit]{CarlosTexNote}
+% Install globally with: bash tools/install.sh
+% Or copy CarlosTexNote.cls next to this file.
+% Run: latexmk -xelatex -synctex=1 -outdir=build main.tex
+% Change theme=classic to ocean / forest / sunset / violet as desired.
+\documentclass[circuit,theme=classic]{CarlosTexNote}
 
 \title{课程笔记示例}
 \author{Carlos QU}
@@ -10,7 +12,6 @@
 \begin{document}
 
 \maketitle
-
 \tableofcontents
 
 \chapter{示例章节}
@@ -41,7 +42,8 @@
 先写等价无穷小，再判断是否需要洛必达。
 \end{keybox}
 
-其他环境：\texttt{property}、\texttt{corollary}、\texttt{lemma}、\texttt{proposition}、\texttt{remark}、
-\texttt{egs}、\texttt{warningbox}、\texttt{methodbox}、\texttt{summarybox}，详见仓库 README 与 demo 工程。
+\begin{recallbox}[闭卷提取]
+不看笔记，能否复述介值定理的条件、结论与几何意义？
+\end{recallbox}
 
 \end{document}

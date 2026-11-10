@@ -1,144 +1,178 @@
 # CarlosTexNote
 
-面向中文学习笔记的 XeLaTeX 文档类：紧凑版式、彩色定理盒子、markdown 风格的 callout 提示块。
+面向中文学习笔记的 XeLaTeX 文档类。当前版本采用紧凑、复习导向的页面节奏，并提供五套可在 `main.tex` 中切换的语义配色主题。
 
-视觉沿袭 [CarlosTexRpt](https://github.com/CCandle/CarlosTexRpt)，定理类盒子的组织参考 `carlosreport` 与 Obsidian callout。固定使用 XeLaTeX。
-
-## 特性
-
-- 基于 `ctexrep`：`chapter` 为顶层、每章另起页、双面排版（`twoside, openany`）
-- 标题层级：`\paragraph` 是带编号的 run-in 小标题；`\subparagraph` 是蓝色（`CarlosBlue`）的
-  "行首关键词"（run-in、无额外段前距，行距与正文一致，笔记里用 UltiSnips 的 `spara` 触发）
-- `\keyword{...}`：绿色（`CarlosTeal`）行内关键词，只改颜色，字体/字号/行距/间距
-  全部继承正文；UltiSnips 触发词 `KW`
-- 内置数学笔记环境：定义、定理、性质、推论、引理、命题、注、例题、解答、证明，按章编号，支持 `\autoref`
-- 四个非编号 callout：`keybox`、`warningbox`、`methodbox`、`summarybox`
-- 图片默认从 `img/`、`fig/`、`pic/` 三个目录查找
-- 宏契约：`\d`（直立微分 d）、`\R \N \Z \Q \C \O`
-- 可选 `[circuit]` 类选项加载 circuitikz（矩形电阻、线圈电感）
+- **XeLaTeX only**；基于 `ctexrep`，A4 双面排版。
+- 单文件、自包含：只需 `CarlosTexNote.cls`，不依赖额外的主题 `.sty` 文件。
+- 保留原有数学环境、交叉引用宏、图片路径和可选 `circuitikz` 支持。
 
 ## 快速开始
 
-`CarlosTexNote.cls` 有两种用法，任选其一：
-
-1. 复制到笔记工程目录（与 `main.tex` 同级）；
-2. 安装到 TEXMFHOME：`bash tools/install.sh`。
-
-最小示例：
+在 `main.tex` 中选择主题：
 
 ```latex
-\documentclass{CarlosTexNote}
+\documentclass[circuit,theme=ocean]{CarlosTexNote}
+```
 
-\title{高等数学笔记}
-\author{Carlos QU}
-\date{\today}
+`circuit` 是可选项；`theme` 可选值如下：
 
-\begin{document}
+| 参数 | 风格 | 主色 | 辅色 | 暖色 |
+|---|---|---|---|---|
+| `classic` | 经典、均衡 | 学术蓝 | 蓝绿色 | 琥珀金 |
+| `ocean` | 清爽、对比鲜明 | 钴蓝 | 海洋青 | 琥珀金 |
+| `forest` | 自然、柔和 | 森林绿 | 翡翠绿 | 暖金 |
+| `sunset` | 温暖、有个性 | 珊瑚酒红 | 深青绿 | 琥珀金 |
+| `violet` | 鲜明、辨识度高 | 紫罗兰 | 蓝绿色 | 古金 |
+
+不写 `theme` 时默认为 `classic`。只需修改 `\documentclass` 选项，章节文件和 Snippet 无需改动。
+
+```latex
+\documentclass[circuit,theme=classic]{CarlosTexNote}
+\documentclass[circuit,theme=ocean]{CarlosTexNote}
+\documentclass[circuit,theme=forest]{CarlosTexNote}
+\documentclass[circuit,theme=sunset]{CarlosTexNote}
+\documentclass[circuit,theme=violet]{CarlosTexNote}
+```
+
+未知主题会产生明确的 LaTeX 错误，并列出可用主题。
+
+## 安装
+
+### 安装到 TEXMFHOME（推荐）
+
+```bash
+git pull
+bash tools/install.sh
+kpsewhich CarlosTexNote.cls
+```
+
+安装脚本会将唯一需要的类文件复制到：
+
+```text
+$(kpsewhich -var-value=TEXMFHOME)/tex/latex/carlostexnote/CarlosTexNote.cls
+```
+
+如果使用 macOS 默认 TeX Live，通常位于 `~/Library/texmf/tex/latex/carlostexnote/`。TEXMFHOME 无需运行 `texhash`。
+
+### 项目内使用
+
+也可以只把 `CarlosTexNote.cls` 复制到 `main.tex` 同级目录。没有 companion `.sty` 文件需要复制。
+
+## 排版设计
+
+- 正文字号保持小四（12 pt）；行距调整为 1.18 倍，段落采用紧凑节奏。
+- A4 双面版心：内边距 24.5 mm、外边距 20.5 mm；上下边距约 19 mm。
+- 不再全局强制行内公式使用 `\displaystyle`，避免分式、积分等撑高正文行距；展示公式仍由 `\[...\]`、`equation`、`align` 等环境控制。
+- 标题层级：`\paragraph` 是编号的块级知识点标题；`\subparagraph` 是行内提示词/知识线索，适配现有 `para` 与 `spara` Snippet。
+- 定义、定理采用轻量左侧色条；性质、推论使用紧凑标题；例题、解答和提示块采用不同语义色，不再把每个知识点都包成完整圆角卡片。
+- 主题只改变语义色板，不改变颜色的含义：深色用于章标题/定理，主色用于节标题/定义，青色用于关键词/性质，暖色用于例题/总结/闭卷提取，红色用于易错警示。
+- 浅色背景和正文墨色在所有主题中保持克制，兼顾屏幕阅读与普通打印。
+
+## 标题页与目录
+
+原有写法继续有效：
+
+```latex
 \maketitle
 \tableofcontents
+```
 
+也提供可选的紧凑前置页命令 `\notefrontmatter`，将标题块与目录放在同一页：
+
+```latex
+\begin{document}
+\notefrontmatter
 \chapter{函数与极限}
-\begin{theorem}[夹逼定理]
-  ...
-\end{theorem}
-\begin{proof}
-  ...
-\end{proof}
-\begin{example}[2024 数一 T3]
-  ...
-\end{example}
-\begin{solution}
-  ...
-\end{solution}
-\begin{keybox}
-  ...
-\end{keybox}
-
+...
 \end{document}
 ```
 
-编译：
+## 内置数学环境与提示块
 
-```bash
-latexmk -xelatex -synctex=1 -interaction=nonstopmode -file-line-error -outdir=build main.tex
-```
-
-## 环境
-
-| 中文 | 环境名 | 编号 | UltiSnips 触发词 |
-| --- | --- | --- | --- |
-| 定义 | `definition` | 按章，独立计数器 | `def` |
-| 定理 | `theorem` | 按章，独立计数器 | `thm` |
-| 性质 | `property` | 按章，独立计数器 | `prp` |
-| 推论 | `corollary` | 按章，独立计数器 | `cor` |
-| 引理 | `lemma` | 按章，独立计数器 | `lem` |
-| 命题 | `proposition` | 按章，独立计数器 | `pro` |
+| 中文 | 环境 | 编号 | 现有 UltiSnips |
+|---|---|---|---|
+| 定义 | `definition` | 按章独立编号 | `def` |
+| 定理 | `theorem` | 按章独立编号 | `thm` |
+| 性质 | `property` | 按章独立编号 | `prp` |
+| 推论 | `corollary` | 按章独立编号 | `cor` |
+| 引理 | `lemma` | 按章独立编号 | `lem` |
+| 命题 | `proposition` | 按章独立编号 | `pro` |
+| 例题 | `example` | 按章独立编号 | `eg` |
+| 解答 | `solution` | 不编号 | `sol` |
 | 注 | `remark` | 不编号 | `rem` |
-| 例题 | `example` | 按章，独立计数器 | `eg` |
-| 解答 | `solution` | 不编号，紧贴例题 | `sol` |
-| 例题 + 解答 | 两个环境连排 | — | `egs` |
 | 证明 | `proof` | 不编号 | `pf` |
 | 重点 | `keybox` | 不编号 | `key` |
-| 易错 | `warningbox` | 不编号 | `warn` |
+| 易错 | `warningbox` | 不编号 | `warn` / `mist` |
 | 方法 | `methodbox` | 不编号 | `mthd` |
 | 小结 | `summarybox` | 不编号 | `smry` |
+| 闭卷提取 | `recallbox` | 不编号 | `recall` |
 
-带标题参数的写法：`\begin{theorem}[洛必达法则] ... \end{theorem}`，编号会自动变成“定理 1.1 洛必达法则”。标题留空时只显示编号。
-
-示例引用：
+提示块均支持可选标题：
 
 ```latex
-\begin{theorem}[介值定理]\label{thm:ivt}
-  ...
-\end{theorem}
-
-由\autoref{thm:ivt}可知，...
+\begin{recallbox}[闭卷提取]
+不看笔记，能否复述定理的条件、结论和适用边界？
+\end{recallbox}
 ```
 
 ## 常用宏
 
 | 宏 | 含义 |
-| --- | --- |
-| `\d` | 直立微分 d，例如 `\frac{\d u}{\d x}`；文本模式仍保留原来的重音命令 |
+|---|---|
+| `\keyword{...}` | 行内强调关键词，继承当前主题的 Teal 色 |
+| `\cue{...}` | 灰色无衬线知识线索 |
+| `\d` | 数学模式下输出直立微分 d；文本模式保留原重音命令 |
 | `\R \N \Z \Q \C \O` | 实数集、自然数集、整数集、有理数集、复数集、空集 |
-| `\rank` `\diag` | 秩、对角矩阵算子（amsmath 的 `\operatorname`） |
-| `\cnoteheader` | 标题块左上角文字，默认“学习笔记”，可用 `\renewcommand` 修改 |
+| `\rank`、`\diag` | 秩、对角矩阵算子 |
+| `\cnoteheader` | 标题块左上角文字，默认“学习笔记” |
 | `\qedsymbol` | 证明结束符号，默认实心方块 |
 
-课程专用宏（例如电分笔记的 `\Uph`、`\phas`）建议写在笔记工程的 `macro.tex` 里，不要放进类文件。
+课程专用宏（例如电力电子笔记中的 `\Uph`、`\phas`）仍建议放在笔记工程自己的 `macro.tex`，不要写进类文件。
 
 ## 图片路径
 
-类文件已经设置：
+默认搜索 `img/`、`fig/`、`pic/`：
 
 ```latex
-\graphicspath{{img/}{fig/}{pic/}}
+\includegraphics[width=0.8\textwidth]{example.pdf}
 ```
 
-因此图片放进 `img/`、`fig/` 或 `pic/` 后，`\includegraphics` 直接写文件名即可。注意浮动体不能放进盒子内部；盒子里的图直接写 `tikzpicture`，需要编号时把图放在盒子外的 `figure` 环境中。
+浮动体不要放进 `tcolorbox` 内部；盒子内直接使用 `tikzpicture`。需要图号时，把 `figure` 放在盒子外。
+
+## 配色样张
+
+统一内容的主题预览源文件位于 `demo/theme-showcase.tex`。在仓库根目录执行：
+
+```bash
+bash tools/build-theme-showcase.sh
+```
+
+脚本会分别编译五套主题，输出到 `build/theme-showcase/<theme>/main.pdf`。需要 TeX Live、XeLaTeX 和 latexmk。
 
 ## 目录结构
 
 ```text
 CarlosTexNote/
 ├── CarlosTexNote.cls
-├── main.tex              # 最小示例
+├── main.tex
 ├── README.md
 ├── LICENSE
-├── tools/install.sh      # 安装到 TEXMFHOME
-└── .vscode/settings.json # VS Code + LaTeX Workshop
+├── demo/
+│   └── theme-showcase.tex
+└── tools/
+    ├── install.sh
+    └── build-theme-showcase.sh
 ```
 
 ## 与 CarlosTexRpt / CarlosTexArt 的关系
 
-- `CarlosTexRpt`：紧凑工程报告，视觉来源；
-- `CarlosTexArt`：科技论文模板，`autoref` 中文名、按章编号等约定来源；
-- `CarlosTexNote` 是独立自包含的类，不加载上面两个类，互不影响。
+`CarlosTexNote` 是独立、自包含的笔记类，不加载 `CarlosTexRpt` 或 `CarlosTexArt`，互不影响。视觉延续原有 Carlos 系列的学术蓝色基调，但将盒子、版心、段落节奏和主题切换针对学习/复习场景重新整理。
 
 ## 版本
 
-v0.1.0（MVP）：环境、盒子、编号、图片路径、宏契约。后续按实际使用再补复习类功能。
+- **v0.2.0**：紧凑复习版式、五套可切换语义配色、闭卷提取块；保留原数学宏、定理环境、交叉引用与 `circuit` 选项。
+- **v0.1.0**：初始 MVP，提供数学环境、盒子、编号、图片路径与宏契约。
 
 ## License
 
-MIT。视觉与部分设置来自同作者的 CarlosTexRpt / CarlosTexArt。
+MIT。视觉与部分设置来自同作者的 CarlosTexRpt / CarlosTexArt.
